@@ -119,6 +119,37 @@ section{padding:60px 0;scroll-margin-top:var(--nav-h)}
   color:var(--accent);font-weight:800;font-size:13px}
 .how strong{color:var(--text)}
 
+/* Floating aurora orbs (hero) */
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.4;pointer-events:none;z-index:-1}
+.orb.o1{width:340px;height:340px;background:#14b8a6;top:-80px;left:-100px;animation:drift1 14s ease-in-out infinite alternate}
+.orb.o2{width:280px;height:280px;background:#a78bfa;top:40px;right:-80px;animation:drift2 18s ease-in-out infinite alternate}
+.orb.o3{width:200px;height:200px;background:#38bdf8;bottom:-60px;left:38%;animation:drift1 22s ease-in-out infinite alternate-reverse}
+@keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,40px) scale(1.15)}}
+@keyframes drift2{from{transform:translate(0,0) scale(1)}to{transform:translate(-70px,50px) scale(.9)}}
+
+/* Animated gradient headline */
+.hero h1{background:linear-gradient(90deg,#fff,#8ee9dc 30%,#a78bfa 60%,#fff 90%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s linear infinite}
+@keyframes shine{to{background-position:250% 0}}
+
+/* Certificates */
+.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.cert{display:flex;gap:16px;align-items:flex-start;background:linear-gradient(180deg,var(--card),var(--bg-2));border:1px solid var(--border);border-radius:16px;padding:20px;transition:border-color .18s,transform .18s}
+.cert:hover{border-color:var(--accent);transform:translateY(-3px)}
+.cert .rozet{width:46px;height:46px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;font-size:22px;
+  background:rgba(45,212,191,.12);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+.cert h4{font-size:15px;font-weight:700}
+.cert .verici{font-size:12.5px;color:var(--accent);font-weight:600;margin-top:2px}
+.cert p{font-size:12.5px;color:var(--muted);margin-top:6px}
+.cert code{font-size:11px;background:rgba(45,212,191,.08);border:1px solid var(--border);padding:2px 7px;border-radius:6px;color:var(--accent)}
+
+/* Contact CTA */
+.cta{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(20,184,166,.14),rgba(167,139,250,.10) 60%),var(--card);
+  border:1px solid var(--border);border-radius:20px;padding:44px 32px;text-align:center}
+.cta h3{font-size:clamp(21px,3.4vw,28px);font-weight:800;letter-spacing:-.02em}
+.cta p{color:var(--muted);margin-top:8px;font-size:15px}
+.cta .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
 /* Footer */
 footer{border-top:1px solid var(--border);padding:38px 0;color:var(--muted);font-size:14px;background:var(--bg-2)}
 footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center}
@@ -137,7 +168,9 @@ footer a:hover{color:var(--accent)}
   *{scroll-behavior:auto!important}
   .reveal{opacity:1!important;transform:none!important;transition:none}
   .badge .dot{animation:none}
-  .btn,.card,.stat,.skill{transition:none}
+  .btn,.card,.stat,.skill,.cert{transition:none}
+  .orb{animation:none}
+  .hero h1{animation:none}
 }
 </style>
 </head>
@@ -152,6 +185,7 @@ footer a:hover{color:var(--accent)}
       <ul>
         <li><a class="link" href="#projects">Projects</a></li>
         <li><a class="link" href="#skills">Skills</a></li>
+        <li><a class="link" href="#certs">Certificates</a></li>
         <li><a class="link" href="#how">How I Work</a></li>
         <li><a class="link" href="#contact">Contact</a></li>
       </ul>
@@ -162,6 +196,7 @@ footer a:hover{color:var(--accent)}
 <main id="top">
 
 <div class="hero">
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
   <div class="container">
     <span class="badge"><span class="dot"></span> Available for work · Siirt, Türkiye</span>
     <h1>Yusuf Gök</h1>
@@ -173,9 +208,9 @@ footer a:hover{color:var(--accent)}
       <a class="btn ghost" href="https://trendtopic.vercel.app" target="_blank" rel="noopener">Live product: TrendTopic</a>
     </div>
     <div class="stats">
-      <div class="stat"><div class="num">9</div><div class="label">Products shipped solo</div></div>
+      <div class="stat"><div class="num" data-sayac="9">9</div><div class="label">Products shipped solo</div></div>
       <div class="stat"><div class="num">24/7</div><div class="label">Production services operated</div></div>
-      <div class="stat"><div class="num">2</div><div class="label">Certificates (n8n · Prompt Eng.)</div></div>
+      <div class="stat"><div class="num" data-sayac="2">2</div><div class="label">Certificates (n8n · Prompt Eng.)</div></div>
     </div>
   </div>
 </div>
@@ -254,6 +289,39 @@ footer a:hover{color:var(--accent)}
   </div>
 </section>
 
+<section id="certs">
+  <div class="container">
+    <div class="section-title reveal">Credentials</div>
+    <div class="section-sub reveal">Education &amp; Certificates</div>
+    <div class="certs">
+      <div class="cert reveal">
+        <div class="rozet">🎓</div>
+        <div>
+          <h4>B.Sc. Computer Engineering (final year)</h4>
+          <div class="verici">Siirt University — ongoing</div>
+          <p>Focus on building real products alongside coursework: 9 shipped SaaS &amp; automation projects.</p>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <div class="rozet">⚙️</div>
+        <div>
+          <h4>n8n Certificate</h4>
+          <div class="verici">n8n.io — workflow automation</div>
+          <p>Verification: <code>N8N-MLJRDZK1-ZDL06</code></p>
+        </div>
+      </div>
+      <div class="cert reveal">
+        <div class="rozet">🤖</div>
+        <div>
+          <h4>AI &amp; Prompt Engineering Certificate</h4>
+          <div class="verici">Applied prompt engineering</div>
+          <p>Directing LLMs for production work: spec-driven generation, evaluation, and iteration.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="how">
   <div class="container">
     <div class="section-title reveal">Method</div>
@@ -270,9 +338,22 @@ footer a:hover{color:var(--accent)}
   </div>
 </section>
 
+<section id="contact">
+  <div class="container">
+    <div class="cta reveal">
+      <h3>Let's build something that ships.</h3>
+      <p>Remote-friendly, automation-obsessed, fast from idea to production.</p>
+      <div class="links">
+        <a class="btn primary" href="mailto:bgook333@gmail.com">bgook333@gmail.com</a>
+        <a class="btn ghost" href="https://github.com/axyusuf" target="_blank" rel="noopener">github.com/axyusuf</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<footer id="contact">
+<footer>
   <div class="container">
     <div class="row">
       <div>© 2026 Yusuf Gök — Siirt, Türkiye</div>
@@ -301,6 +382,21 @@ footer a:hover{color:var(--accent)}
       });
     }, {rootMargin:'0px 0px -8% 0px', threshold:0.12});
     items.forEach(function(el){ io.observe(el); });
+  }
+
+  // Stat count-up
+  if(!reduce){
+    document.querySelectorAll('[data-sayac]').forEach(function(el){
+      var hedef = parseInt(el.getAttribute('data-sayac'), 10);
+      var t0 = null;
+      function adim(t){
+        if(t0 === null) t0 = t;
+        var oran = Math.min((t - t0) / 900, 1);
+        el.textContent = Math.round(hedef * (1 - Math.pow(1 - oran, 3)));
+        if(oran < 1) requestAnimationFrame(adim);
+      }
+      requestAnimationFrame(adim);
+    });
   }
 
   // Active section link highlight
